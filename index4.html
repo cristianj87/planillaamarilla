@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planilla Amarilla - STUT-CJ</title>
+    <style>
+        /* ==============================
+           CSS - ESTILOS VISUALES
+           ============================== */
+        :root {
+            --amarillo-principal: #FFCC00;
+            --amarillo-oscuro: #E6B800;
+            --texto-oscuro: #333333;
+            --fondo-claro: #F8F9FA;
+            --blanco: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--fondo-claro);
+            color: var(--texto-oscuro);
+            line-height: 1.6;
+        }
+
+        /* Navegación */
+        header {
+            background-color: var(--texto-oscuro);
+            color: var(--blanco);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header h2 {
+            color: var(--amarillo-principal);
+        }
+
+        nav a {
+            color: var(--blanco);
+            text-decoration: none;
+            margin-left: 1.5rem;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--amarillo-principal);
+        }
+
+        /* Sección Hero (Inicio) */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1541339907198-e08756dedf3f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') center/cover;
+            color: var(--blanco);
+            text-align: center;
+            padding: 6rem 1rem;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            color: var(--amarillo-principal);
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--amarillo-principal);
+            color: var(--texto-oscuro);
+            padding: 0.8rem 2rem;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        .btn:hover {
+            background-color: var(--amarillo-oscuro);
+            transform: scale(1.02);
+        }
+
+        /* Secciones Generales */
+        section {
+            padding: 4rem 5%;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 3rem;
+            text-transform: uppercase;
+            border-bottom: 3px solid var(--amarillo-principal);
+            display: inline-block;
+            padding-bottom: 0.5rem;
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .text-center {
+            text-align: center;
+        }
+
+        /* Imagen del Plan */
+        .plan-img {
+            max-width: 70%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin-top: 2rem;
+        }
+
+        /* Ejes de Acción y Equipo (Cuadrícula) */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background-color: var(--blanco);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border-top: 5px solid var(--amarillo-principal);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card h3 {
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .card ul {
+            text-align: left;
+            padding-left: 1.5rem;
+        }
+        
+        /* Fotos de Integrantes */
+        .foto-integrante {
+            width: 130px; /* Tamaño de la foto */
+            height: 130px;
+            border-radius: 50%; /* Hace la foto circular */
+            object-fit: cover; /* Centra y recorta la foto automáticamente sin deformarla */
+            margin-bottom: 1rem;
+            border: 4px solid var(--amarillo-principal);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        /* Contacto */
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: var(--blanco);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-family: inherit;
+        }
+
+        /* ==============================
+           CSS - VENTANA MODAL EMERGENTE (PDF)
+           ============================== */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            position: relative;
+            background-color: #ffffff;
+            margin: 2vh auto;
+            width: 85%;
+            height: 92vh;
+            border-radius: 8px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.5);
+            overflow: hidden;
+            animation: entradaModal 0.3s ease-out;
+        }
+
+        @keyframes entradaModal {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 25px;
+            color: #333333;
+            font-size: 38px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 2100;
+            transition: color 0.2s;
+        }
+
+        .close-btn:hover {
+            color: var(--amarillo-oscuro);
+        }
+
+        .modal-body {
+            width: 100%;
+            height: 100%;
+            padding-top: 50px;
+        }
+
+        .modal-body iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--texto-oscuro);
+            color: var(--blanco);
+            text-align: center;
+            padding: 2rem 1rem;
+        }
+
+        /* Diseño Responsivo */
+        @media (max-width: 768px) {
+            header { flex-direction: column; text-align: center; }
+            nav { margin-top: 1rem; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+            nav a { margin: 0 0.5rem; font-size: 0.9rem; }
+            .hero h1 { font-size: 2rem; }
+            .modal-content { width: 95%; height: 85vh; margin: 7vh auto; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVEGACIÓN -->
+    <header>
+        <h2>Planilla Amarilla</h2>
+        <nav>
+            <a href="#inicio">Inicio</a>
+            <a href="#infografia">Plan Estratégico</a>
+            <a href="#ejes">Ejes de Trabajo</a>
+            <a href="#integrantes">Integrantes</a>
+            <a href="#contacto">Contacto</a>
+        </nav>
+    </header>
+
+    <!-- INICIO (HERO) -->
+    <section id="inicio" class="hero">
+        <h1>UNIÓN FORTALECIDA Y PREPARADA PARA EL FUTURO</h1>
+        <p>Sindicato de Trabajadores de la Universidad Tecnológica de Ciudad Juárez (STUT-CJ). Unidad que representa, gestión que transforma.</p>
+        <button id="btnAbrirPlan1" class="btn">Conoce nuestro plan de trabajo 2026–2029 
+        <p style="color: var(--texto-oscuro); font-weight: bold; margin-bottom: 2rem;">Legalidad • Honestidad • Transparencia • Responsabilidad</p>
+        <p>Ver Plan de Trabajo PDF</p></button>
+    </section>
+
+    <!-- INFOGRAFÍA (LA IMAGEN) -->
+    <section id="infografia" class="text-center" style="background-color: var(--blanco);">
+        <h2 class="section-title">Nuestro Plan Estratégico 2026-2029</h2>
+        <p>Conoce a detalle nuestros compromisos.</p>
+        <img src="Oficial Planilla Amarilla.png" alt="Plan Estratégico Planilla Amarilla" class="plan-img">
+    </section>
+
+    <!-- EJES DE ACCIÓN -->
+    <section id="ejes">
+        <h2 class="section-title">Nuestros Ejes Estratégicos</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>⚖️ Defensa Laboral</h3>
+                <ul>
+                    <li>Atención al 100% de solicitudes.</li>
+                    <li>Respuesta en menos de 5 días.</li>
+                    <li>Acompañamiento en gestiones.</li>
+                    <li>Diálogo constante con autoridades.</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>🔍 Transparencia</h3>
+                <ul>
+                    <li>Informes financieros trimestrales.</li>
+                    <li>Publicación de acuerdos.</li>
+                    <li>Informes de actividades.</li>
+                    <li>Cuentas claras para todos.</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>💻 Innovación Digital</h3>
+                <ul>
+                    <li>Portal del Afiliado online.</li>
+                    <li>Digitalización de procesos.</li>
+                    <li>Expediente Sindical Digital.</li>
+                    <li>Comunicación eficiente.</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>🏅 Bienestar Integral</h3>
+                <ul>
+                    <li>Convenios con instituciones públicas y privadas (+15).</li>
+                    <li>Cursos, talleres y diplomados.</li>
+                    <li>Salud preventiva y deportes.</li>
+                    <li>Actividades culturales y familiares.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN DE DESCARGA / VISUALIZACIÓN INTERACTIVA -->
+    <section style="background-color: var(--amarillo-principal); text-align: center;">
+        <h2 style="color: var(--texto-oscuro); margin-bottom: 1rem;">Plan Estratégico Sindical 2026–2029</h2>
+        <p style="color: var(--texto-oscuro); font-weight: bold; margin-bottom: 2rem;">Legalidad • Honestidad • Transparencia • Responsabilidad</p>
+        <button id="btnAbrirPlan2" class="btn" style="background-color: var(--texto-oscuro); color: var(--amarillo-principal);">Ver Plan de Trabajo PDF</button>
+    </section>
+
+    <!-- INTEGRANTES DEL EQUIPO CON FOTOS -->
+    <section id="integrantes" style="background-color: var(--blanco);">
+        <h2 class="section-title">Conoce a Nuestro Equipo</h2>
+        <p class="text-center" style="margin-bottom: 2rem;">Un grupo de profesionales comprometidos con la transparencia y la defensa de tus derechos.</p>
+        <div class="grid">
+            
+            <!-- Integrante 1 -->
+            <div class="card text-center">
+                <!-- CAMBIA LA URL DE src POR EL NOMBRE DE TU FOTO -->
+                <img src="Fotos/Yadira.jpg" alt="Foto Secretario General" class="foto-integrante">
+                <h3>Carmen Yadira Tarango O.</h3>
+                <p style="color: var(--amarillo-oscuro); font-weight: bold;">Secretaría General</p>
+                <p style="font-size: 0.9rem; margin-top: 10px;">Breve descripción o trayectoria del candidato dentro de la institución.</p>
+            </div>
+            
+            <!-- Integrante 2 -->
+            <div class="card text-center">
+                <!-- CAMBIA LA URL DE src POR EL NOMBRE DE TU FOTO -->
+                <img src="foto2.jpg" alt="Foto Secretario de Organización" class="foto-integrante">
+                <h3>Víctor Manuel Portillo Castillo</h3>
+                <p style="color: var(--amarillo-oscuro); font-weight: bold;">Secretaría de Organización</p>
+                <p style="font-size: 0.9rem; margin-top: 10px;">Breve descripción o trayectoria del candidato dentro de la institución.</p>
+            </div>
+            
+            <!-- Integrante 3 -->
+            <div class="card text-center">
+                <!-- CAMBIA LA URL DE src POR EL NOMBRE DE TU FOTO -->
+                <img src="Fotos/Alberto Herrera.jpg" alt="Foto Secretario Finanzas" class="foto-integrante">
+                <h3>José Alberto Herrera Ogaz</h3>
+                <p style="color: var(--amarillo-oscuro); font-weight: bold;">Secretaría de Finanzas</p>
+                <p style="font-size: 0.9rem; margin-top: 10px;">Breve descripción o trayectoria del candidato dentro de la institución.</p>
+            </div>
+            
+            <!-- Integrante 4 -->
+             <div class="card text-center">
+                 <!-- CAMBIA LA URL DE src POR EL NOMBRE DE TU FOTO -->
+                <img src="foto4.jpg" alt="Foto Secretario Trabajo" class="foto-integrante">
+                <h3>Nombre del Candidato</h3>
+                <p style="color: var(--amarillo-oscuro); font-weight: bold;">Secretaría de Trabajo</p>
+                <p style="font-size: 0.9rem; margin-top: 10px;">Breve descripción o trayectoria del candidato dentro de la institución.</p>
+            </div>
+            
+        </div>
+    </section>
+
+    <!-- FORMULARIO DE CONTACTO -->
+    <section id="contacto">
+        <h2 class="section-title">Buzón de Sugerencias</h2>
+        <div class="contact-form">
+            <form id="formPlanilla">
+                <div class="form-group">
+                    <label for="nombre">Nombre o Área de Trabajo</label>
+                    <input type="text" id="nombre" required placeholder="Ej. Juan Pérez - Mantenimiento">
+                </div>
+                <div class="form-group">
+                    <label for="mensaje">Tu propuesta o comentario</label>
+                    <textarea id="mensaje" rows="4" required placeholder="Escribe aquí tu mensaje..."></textarea>
+                </div>
+                <button type="submit" class="btn" style="width: 100%;">Enviar Mensaje</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- VENTANA MODAL (POP-UP PDF) -->
+    <div id="modalPlanPDF" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <div class="modal-body">
+                <iframe src="PLAN DE TRABAJO FORMATO FORMAL - PLANILLA AMARILLA.pdf" type="application/pdf"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <!-- PIE DE PÁGINA -->
+    <footer>
+        <p>&copy; 2026 Planilla Amarilla - STUT-CJ. Todos los derechos reservados.</p>
+    </footer>
+
+    <!-- ==============================
+         JAVASCRIPT - INTERACTIVIDAD Y LÓGICA MODAL
+         ============================== -->
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        const modal = document.getElementById("modalPlanPDF");
+        const btnAbrir1 = document.getElementById("btnAbrirPlan1");
+        const btnAbrir2 = document.getElementById("btnAbrirPlan2");
+        const btnCerrar = document.querySelector(".close-btn");
+
+        function mostrarModal() {
+            modal.style.display = "block";
+            document.body.style.overflow = "hidden";
+        }
+
+        function ocultarModal() {
+            modal.style.display = "none";
+            document.body.style.overflow = "auto";
+        }
+
+        btnAbrir1.addEventListener("click", mostrarModal);
+        btnAbrir2.addEventListener("click", mostrarModal);
+        btnCerrar.addEventListener("click", ocultarModal);
+
+        window.addEventListener("click", function(event) {
+            if (event.target === modal) {
+                ocultarModal();
+            }
+        });
+
+        document.getElementById('formPlanilla').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('¡Gracias! Tu mensaje ha sido enviado al equipo de la Planilla Amarilla. Estamos trabajando para fortalecer nuestra unión.');
+            this.reset();
+        });
+    </script>
+</body>
+</html>
