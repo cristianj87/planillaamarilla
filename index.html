@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/jpeg" href="logo.jpeg">
+    <title>Planilla Amarilla - STUT-CJ</title>
+    <style>
+        /* ==============================
+           CSS - ESTILOS VISUALES
+           ============================== */
+        :root {
+            --amarillo-principal: #FFCC00;
+            --amarillo-oscuro: #E6B800;
+            --texto-oscuro: #333333;
+            --fondo-claro: #F8F9FA;
+            --blanco: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--fondo-claro); 
+            color: var(--texto-oscuro);
+            line-height: 1.6;
+        }
+
+        /* ==============================
+           CSS - FONDO ANIMADO MODERNO (SOLO PARA TARJETAS)
+           ============================== */
+        .wrapper-tarjetas {
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(to left, #f8f9fa, #e9ecef);
+        }
+
+        .area-animada {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0; 
+        }
+
+        .figuras {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+        }
+
+        .figuras li {
+            position: absolute;
+            display: block;
+            list-style: none;
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 204, 0, 0.2);
+            animation: flotar 25s linear infinite;
+            bottom: -150px;
+        }
+
+        .figuras li:nth-child(1) { left: 25%; width: 80px; height: 80px; animation-delay: 0s; }
+        .figuras li:nth-child(2) { left: 10%; width: 20px; height: 20px; animation-delay: 2s; animation-duration: 12s; }
+        .figuras li:nth-child(3) { left: 70%; width: 20px; height: 20px; animation-delay: 4s; }
+        .figuras li:nth-child(4) { left: 40%; width: 60px; height: 60px; animation-delay: 0s; animation-duration: 18s; }
+        .figuras li:nth-child(5) { left: 65%; width: 20px; height: 20px; animation-delay: 0s; }
+        .figuras li:nth-child(6) { left: 75%; width: 110px; height: 110px; animation-delay: 3s; background: rgba(51, 51, 51, 0.05); }
+        .figuras li:nth-child(7) { left: 35%; width: 150px; height: 150px; animation-delay: 7s; }
+        .figuras li:nth-child(8) { left: 50%; width: 25px; height: 25px; animation-delay: 15s; animation-duration: 45s; }
+        .figuras li:nth-child(9) { left: 20%; width: 15px; height: 15px; animation-delay: 2s; animation-duration: 35s; background: rgba(51, 51, 51, 0.05); }
+        .figuras li:nth-child(10) { left: 85%; width: 150px; height: 150px; animation-delay: 0s; animation-duration: 11s; }
+
+        @keyframes flotar {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; border-radius: 0; }
+            100% { transform: translateY(-1500px) rotate(720deg); opacity: 0; border-radius: 50%; }
+        }
+
+        /* Navegación */
+        header {
+            background-color: var(--texto-oscuro);
+            color: var(--blanco);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-container img {
+            height: 45px;
+            width: auto;
+            border-radius: 5px;
+        }
+
+        header h2 {
+            color: var(--amarillo-principal);
+            font-size: 1.5rem;
+        }
+
+        nav a {
+            color: var(--blanco);
+            text-decoration: none;
+            margin-left: 1.5rem;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--amarillo-principal);
+        }
+
+        /* Sección Hero (Inicio) */
+        .hero {
+            background: linear-gradient(-45deg, rgba(0, 0, 0, 0.8), rgba(51, 51, 51, 0.5), rgba(0, 0, 0, 0.9), rgba(10, 10, 10, 0.7)), url('planilla3.png') center/cover;
+            background-size: 200% 200%, cover;
+            animation: degradadoHero 15s ease infinite;
+            color: var(--blanco);
+            text-align: center;
+            padding: 6rem 1rem;
+        }
+
+        @keyframes degradadoHero {
+            0% { background-position: 0% 50%, center; }
+            50% { background-position: 100% 50%, center; }
+            100% { background-position: 0% 50%, center; }
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            color: var(--amarillo-principal);
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--amarillo-principal);
+            color: var(--texto-oscuro);
+            padding: 0.8rem 2rem;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 15px rgba(255, 204, 0, 0.3);
+        }
+
+        .btn:hover {
+            background-color: var(--amarillo-oscuro);
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(255, 204, 0, 0.5);
+        }
+
+        /* Secciones Generales */
+        section {
+            padding: 4rem 5%;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 3rem;
+            text-transform: uppercase;
+            border-bottom: 3px solid var(--amarillo-principal);
+            display: inline-block;
+            padding-bottom: 0.5rem;
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .text-center {
+            text-align: center;
+        }
+
+        /* ==============================
+           CSS - CARRUSEL / SLIDER
+           ============================== */
+        .slider-wrapper {
+            max-width: 75%;
+            position: relative;
+            margin: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            overflow: hidden;
+            background-color: var(--blanco); /* Fondo blanco para las imágenes más pequeñas */
+        }
+
+        .slide {
+            display: none;
+            width: 100%;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 450px; /* Altura fija uniforme para todas las imágenes */
+            object-fit: contain; /* Ajusta la imagen para que se vea completa sin deformarse */
+            display: block;
+            border-radius: 10px;
+            background-color: var(--blanco);
+        }
+
+        .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            padding: 16px;
+            margin-top: -22px;
+            color: white;
+            font-weight: bold;
+            font-size: 24px;
+            transition: 0.4s ease;
+            user-select: none;
+            background-color: rgba(0,0,0,0.5);
+            text-decoration: none;
+        }
+
+        /* CORRECCIÓN: Flecha Anterior a la Izquierda */
+        .prev {
+            left: 0;
+            border-radius: 0 5px 5px 0;
+        }
+
+        .next {
+            right: 0;
+            border-radius: 5px 0 0 5px;
+        }
+
+        .prev:hover, .next:hover {
+            background-color: var(--amarillo-oscuro);
+            color: var(--texto-oscuro);
+        }
+
+        .dots-container {
+            text-align: center;
+            padding: 15px 0 0 0;
+        }
+
+        .dot {
+            cursor: pointer;
+            height: 12px;
+            width: 12px;
+            margin: 0 5px;
+            background-color: #cccccc;
+            border-radius: 50%;
+            display: inline-block;
+            transition: background-color 0.4s ease, transform 0.2s;
+        }
+
+        .dot.active, .dot:hover {
+            background-color: var(--amarillo-oscuro);
+            transform: scale(1.3);
+        }
+
+        .fade {
+            animation-name: fadeAnim;
+            animation-duration: 1.5s;
+        }
+
+        @keyframes fadeAnim {
+            from {opacity: .4} 
+            to {opacity: 1}
+        }
+
+        /* Ejes de Acción y Equipo */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            position: relative;
+            z-index: 1; 
+        }
+
+        .card {
+            background-color: var(--blanco);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            border-top: 5px solid var(--amarillo-principal);
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .card h3 {
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .card ul {
+            text-align: left;
+            padding-left: 1.5rem;
+        }
+        
+        .foto-integrante {
+            width: 130px; 
+            height: 130px;
+            border-radius: 50%; 
+            object-fit: cover; 
+            margin-bottom: 1rem;
+            border: 4px solid var(--amarillo-principal);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        /* ==============================
+           CSS - VENTANA MODAL 
+           ============================== */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            display: flex;
+            flex-direction: column;
+            background-color: #ffffff;
+            margin: 2vh auto;
+            width: 90%;
+            height: 96vh;
+            border-radius: 8px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.5);
+            overflow: hidden;
+            animation: entradaModal 0.3s ease-out;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .btn-descargar {
+            background-color: var(--amarillo-oscuro);
+            color: var(--texto-oscuro);
+            padding: 0.4rem 1rem;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+            font-size: 0.9rem;
+        }
+
+        .close-btn {
+            color: #333333;
+            font-size: 30px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.2s;
+            line-height: 1;
+        }
+
+        .close-btn:hover {
+            color: var(--amarillo-oscuro);
+        }
+
+        .modal-body {
+            flex: 1;
+            width: 100%;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .modal-body iframe {
+            width: 100%;
+            height: 100%;
+            min-height: 80vh;
+            border: none;
+        }
+
+        @keyframes entradaModal {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--texto-oscuro);
+            color: var(--blanco);
+            text-align: center;
+            padding: 2rem 1rem;
+        }
+
+        /* ==============================
+           DISEÑO RESPONSIVO (Tablets y Celulares)
+           ============================== */
+        @media (max-width: 1024px) {
+            .grid { 
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .slider-wrapper { 
+                max-width: 90%; 
+            }
+            .slide img {
+                height: 350px; /* Ajuste para tablets */
+            }
+        }
+
+        @media (max-width: 768px) {
+            header { flex-direction: column; text-align: center; gap: 15px;}
+            .logo-container { justify-content: center; }
+            nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+            nav a { margin: 0 0.5rem; font-size: 0.9rem; }
+            .hero h1 { font-size: 2rem; }
+            
+            .grid { 
+                grid-template-columns: 1fr;
+            }
+            
+            .slider-wrapper { 
+                max-width: 100%; 
+            }
+            
+            /* Ajuste de altura del carrusel para celulares */
+            .slide img {
+                height: 280px; 
+            }
+
+            .modal-content { 
+                width: 100%; 
+                height: 100vh; 
+                margin: 0; 
+                border-radius: 0;
+            }
+            .modal-header .btn-descargar {
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-container">
+            <img src="logo.jpeg" alt="Logo Planilla Amarilla">
+            <h2>Planilla Amarilla</h2>
+        </div>
+        <nav>
+            <a href="#inicio">Inicio</a>
+            <a href="#avisos">Avisos y Plan</a>
+            <a href="#ejes">Ejes de Trabajo</a>
+            <a href="#integrantes">Integrantes</a>
+        </nav>
+    </header>
+
+    <section id="inicio" class="hero">
+        <h1>UNIÓN FORTALECIDA Y PREPARADA PARA EL FUTURO</h1>
+        <p>Sindicato de Trabajadores de la Universidad Tecnológica de Ciudad Juárez (STUT-CJ). </p>
+            <h2 style="color: #ffde21;">Unidad que representa, gestión que transforma.</h2><br>
+        <button id="btnAbrirPlan1" class="btn">
+            Conoce nuestro plan de trabajo 2026–2029
+            <p style="margin: 0; font-size: 0.9rem;">Ver Plan de Trabajo PDF</p>
+        </button>
+    </section>
+
+    <section id="avisos" class="text-center" style="background-color: var(--fondo-claro);">
+        <h2 class="section-title">Avisos y Plan Estratégico</h2>
+        
+        <div class="slider-wrapper">
+            <div class="slide fade">
+                <img src="Oficial Planilla Amarilla.png" alt="Plan Estratégico Planilla Amarilla">
+            </div>
+
+            <div class="slide fade">
+                <img src="planilla.png" alt="Integrantes de la planilla">
+            </div>
+
+            <div class="slide fade">
+                <img src="logo2.jpg" alt="Logo Planilla Amarilla">
+            </div>
+
+            <a class="prev" onclick="moverSlide(-1)">&#10094;</a>
+            <a class="next" onclick="moverSlide(1)">&#10095;</a>
+        </div>
+
+        <div class="dots-container">
+            <span class="dot" onclick="irASlide(1)"></span> 
+            <span class="dot" onclick="irASlide(2)"></span>
+            <span class="dot" onclick="irASlide(3)"></span>
+        </div>
+    </section>
+
+    <div class="wrapper-tarjetas">
+        <div class="area-animada">
+            <ul class="figuras">
+                <li></li><li></li><li></li><li></li><li></li>
+                <li></li><li></li><li></li><li></li><li></li>
+            </ul>
+        </div>
+
+        <section id="ejes" style="position: relative; z-index: 1;">
+            <h2 class="section-title">Nuestros Ejes Estratégicos</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>⚖️ Defensa Laboral</h3>
+                    <ul>
+                        <li>Atención al 100% de solicitudes.</li>
+                        <li>Respuesta en menos de 5 días.</li>
+                        <li>Acompañamiento en gestiones.</li>
+                        <li>Diálogo constante con autoridades.</li>
+                        <li>Acompañamiento en la jubilación.</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>🔍 Transparencia</h3>
+                    <ul>
+                        <li>Informes financieros trimestrales.</li>
+                        <li>Publicación de acuerdos.</li>
+                        <li>Informes de actividades.</li>
+                        <li>Cuentas claras para todos.</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>💻 Innovación Digital</h3>
+                    <ul>
+                        <li>Portal del Afiliado online.</li>
+                        <li>Digitalización de procesos.</li>
+                        <li>Expediente Sindical Digital.</li>
+                        <li>Comunicación eficiente.</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>🏅 Bienestar Integral</h3>
+                    <ul>
+                        <li>Convenios con instituciones públicas y privadas.</li>
+                        <li>Cursos, talleres y diplomados.</li>
+                        <li>Salud preventiva y deportes.</li>
+                        <li>Actividades culturales y familiares.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="integrantes" style="position: relative; z-index: 1;">
+            <h2 class="section-title">Conoce a Nuestro Equipo</h2>
+            <center><h3 style="margin-bottom: 1rem;">Legalidad • Honestidad • Transparencia • Responsabilidad</h3></center>
+            <p class="text-center" style="margin-bottom: 2rem;">Un grupo de profesionales comprometidos con la transparencia y la defensa de tus derechos.</p>
+            <div class="grid">
+                
+                <div class="card text-center">
+                    <img src="Fotosmejor/Carmen Yadira Tarango Ortiz.jpeg" alt="Foto Secretario General" class="foto-integrante">
+                    <h3>Carmen Yadira Tarango O.</h3>
+                    <p style="color: var(--amarillo-oscuro); font-weight: bold;">Secretaria General</p>
+                    <p style="font-size: 0.9rem; margin-top: 10px;">Profesor de asignatura con función tutorial (PACFT), Mantenimiento Industrial  13 años en la Universidad, 10 en el sindicato</p>
+                </div>
+                
+                <div class="card text-center">
+                    <img src="Fotosmejor/Víctor Manuel Portillo Castillo.jpeg" alt="Foto Secretario de Organización" class="foto-integrante">
+                    <h3>Víctor Manuel Portillo Castillo</h3>
+                    <p style="color: var(--amarillo-oscuro); font-weight: bold;">Secretario de Organización</p>
+                    <p style="font-size: 0.9rem; margin-top: 10px;">Profesor de tiempo completo.  15 años en la Universidad. Profesor Inevestigador, carrera de Ingeniería en Logística Internacional.</p>
+                </div>
+
+                 <div class="card text-center">
+                    <img src="Fotosmejor/Itzel Merari Ortiz Vega.jpeg" alt="Foto Secretaria de Actas y Acuerdos" class="foto-integrante">
+                    <h3>Itzel Merari Ortiz Vega</h3>
+                    <p style="color: var(--amarillo-oscuro); font-weight: bold;">Secretaria de Actas y Acuerdos</p>
+                    <p style="font-size: 0.9rem; margin-top: 10px;">PA con función administrativa en el Departamento de idiomas e internacionalización.
+8 años en la Universidad 7 sindicalizada.</p>
+                </div>
+
+                <div class="card text-center">
+                    <img src="Fotosmejor/Marcela Silva Porras.jpeg" alt="Foto Secretario Trabajo" class="foto-integrante">
+                    <h3>Marcela Silva Porras</h3>
+                    <p style="color: var(--amarillo-oscuro); font-weight: bold;">Secretaria de Trabajo</p>
+                    <p style="font-size: 0.9rem; margin-top: 10px;">Ing.Logística Internacional, PA con Función tutorial, 8 años en la Universidad, 2 años en el sindicato</p>
+                </div>
+                
+                <div class="card text-center">
+                    <img src="Fotosmejor/José Alberto Herrera Ogaz.jpeg" alt="Foto Secretario Finanzas" class="foto-integrante">
+                    <h3>José Alberto Herrera Ogaz</h3>
+                    <p style="color: var(--amarillo-oscuro); font-weight: bold;">Secretario de Finanzas</p>
+                    <p style="font-size: 0.9rem; margin-top: 10px;">Adscrito a la carrera de Mecatrónica, 21 años y 10 meses como profesor de tiempo completo en la Universidad, 2 años en el Sindicato</p>
+                </div>     
+                
+                <div class="card text-center">
+                    <img src="Fotosmejor/Edith Ariane Ulloa Lujan.jpeg" alt="Foto Secretario Finanzas" class="foto-integrante">
+                    <h3>Edith Ariane Ulloa Lujan</h3>
+                    <p style="color: var(--amarillo-oscuro); font-weight: bold;">Secretaria de Educación, Cultura y Deportes</p>
+                    <p style="font-size: 0.9rem; margin-top: 10px;">Coordinadora académica de la carrera de Tecnologías de la Información, 13 años en la Universidad , 10 años en el sindicato.</p>
+                </div>
+                
+                <div class="card text-center">
+                    <img src="Fotosmejor/David Lira Molina.jpeg" alt="Foto Secretario Finanzas" class="foto-integrante">
+                    <h3>David Lira Molina</h3>
+                    <p style="color: var(--amarillo-oscuro); font-weight: bold;">Secretario de Prensa y Propaganda</p>
+                    <p style="font-size: 0.9rem; margin-top: 10px;">Tecnologías de la información, PTC, 14 años en la Universidad,10 años sindicalizado.</p>
+                </div>
+
+                <div class="card text-center">
+                    <img src="Fotosmejor/Néstor Rivera Zandate.jpeg" alt="Foto Secretario Finanzas" class="foto-integrante">
+                    <h3>Néstor Rivera Zandate</h3>
+                    <p style="color: var(--amarillo-oscuro); font-weight: bold;">Secretario de Previsión Social </p>
+                    <p style="font-size: 0.9rem; margin-top: 10px;">Profesor de asignatura con función tutorial en las carreras de terapia física y paramédico, 7 años en la Universidad, 2 años en el sindicato.</p>
+                </div>
+
+                <div class="card text-center">
+                    <img src="Fotosmejor/Rosa Ivonne Ortiz Enriquez.jpeg" alt="Foto Suplente Secretario Trabajo" class="foto-integrante">
+                    <h3>Rosa Ivonne Ortiz Enriquez</h3>
+                    <p style="color: var(--amarillo-oscuro); font-weight: bold;">Secretaria de Escalafón</p>
+                    <p style="font-size: 0.9rem; margin-top: 10px;">Adscrita a la carrera de Tecnologías de la información, profesor de tiempo completo, 25 años en la Universidad, 10 años en el sindicato.</p>
+                </div>
+
+                <div class="card text-center">
+                    <img src="Fotosmejor/Alejandro Loya Puga.jpeg" alt="Foto Secretario General" class="foto-integrante">
+                    <h3>Alejandro Loya Puga</h3>
+                    <p style="color: var(--amarillo-oscuro); font-weight: bold;">Suplente de Secretaria General</p>
+                    <p style="font-size: 0.9rem; margin-top: 10px;">Departamento de Mantenimiento Industrial, P.A. Función Tutorial, 13 años en la Universidad, 10 años sindicalizado</p>
+                </div>
+
+                <div class="card text-center">
+                    <img src="Fotosmejor/Juan Cristo Rey Garay.jpeg" alt="Foto Suplente Secretario Trabajo" class="foto-integrante">
+                    <h3>Juan Cristo Rey Garay</h3>
+                    <p style="color: var(--amarillo-oscuro); font-weight: bold;">Suplente de Secretario de Organización</p>
+                    <p style="font-size: 0.9rem; margin-top: 10px;">Adscrito en Desarrollo académico, PTC Carrera de Mantenimiento Industrial,11 años en la Universidad, 1 año y 9 meses sindicalizado</p>
+                </div>
+
+                <div class="card text-center">
+                    <img src="Fotosmejor/Brenda Leticia Chávez García.jpeg" alt="Foto Suplente Secretario Trabajo" class="foto-integrante">
+                    <h3>Brenda Leticia Chávez García</h3>
+                    <p style="color: var(--amarillo-oscuro); font-weight: bold;">Suplente de Secretaria de Actas y Acuerdos</p>
+                    <p style="font-size: 0.9rem; margin-top: 10px;">PTC Mantenimiento Industrial. 15 años, 10 meses en la Universidad, 10 años sindicalizada.</p>
+                </div> 
+
+                <div class="card text-center">
+                    <img src="Fotosmejor/Silvia Susana Rivera.jpeg" alt="Foto Suplente Secretario Trabajo" class="foto-integrante">
+                    <h3>Silvia Susana Rivera Martínez</h3>
+                    <p style="color: var(--amarillo-oscuro); font-weight: bold;">Suplente de Secretaria de Trabajo</p>
+                    <p style="font-size: 0.9rem; margin-top: 10px;">Jefa de oficina en Ingeniería en Logística Internacional, 7 años en la Universidad, 2 años en el sindicato.</p>
+                </div> 
+                
+                <div class="card text-center">
+                    <img src="Fotosmejor/Flor Azucena Valadez Rivera.jpeg" alt="Foto Suplente Secretario Trabajo" class="foto-integrante">
+                    <h3>Flor Azucena Valadez Rivera</h3>
+                    <p style="color: var(--amarillo-oscuro); font-weight: bold;">Suplente de Secretario de Finanzas</p>
+                    <p style="font-size: 0.9rem; margin-top: 10px;">Profesor de asignatura del área de mantenimiento industrial, 8 años en la Universidad, 7 años en el sindicato.</p>
+                </div>       
+
+                <div class="card text-center">
+                    <img src="Fotosmejor/Manuel Alejandro Aguilera Franco.jpeg" alt="Foto Suplente Secretario Trabajo" class="foto-integrante">
+                    <h3>Manuel Alejandro Aguilera Franco</h3>
+                    <p style="color: var(--amarillo-oscuro); font-weight: bold;">Suplente de Secretaria de Educación, Cultura y Deportes</p>
+                    <p style="font-size: 0.9rem; margin-top: 10px;">Técnico en mantenimiento. Depto. Mantenimiento e instalaciónes, 4 años en la Universidad,2 años sindicalizado.</p>
+                </div>
+
+                <div class="card text-center">
+                    <img src="Fotosmejor/Cristian Jahaziel Mariano Salomón.jpeg" alt="Foto Secretario Trabajo" class="foto-integrante">
+                    <h3>Cristian Jahaziel Mariano Salomón</h3>
+                    <p style="color: var(--amarillo-oscuro); font-weight: bold;">Suplente de Secretario de Prensa y Propaganda</p>
+                    <p style="font-size: 0.9rem; margin-top: 10px;">Tecnologías de la información, Profesor de Asignatura con función tutorial, 13 años en la Universidad,10 años sindicalizado.</p>
+                </div>
+
+                <div class="card text-center">
+                    <img src="Fotosmejor/Violeta Chacón.jpeg" alt="Foto Suplente Secretario Trabajo" class="foto-integrante">
+                    <h3>Violeta Chacón Ramos</h3>
+                    <p style="color: var(--amarillo-oscuro); font-weight: bold;">Suplente de Secretario de Previsión Social</p>
+                    <p style="font-size: 0.9rem; margin-top: 10px;">Profesor de asignatura de la carrera de Mecatrónica y Energía turbo solar con 12 años de antigüedad en la Universidad y 10 años perteneciendo al sindicato.</p>
+                </div>
+
+                <div class="card text-center">
+                    <img src="Fotosmejor/Karla Edith Vega Chavez.jpeg" alt="Foto Suplente Secretario Trabajo" class="foto-integrante">
+                    <h3>Karla Edith Vega Chavez</h3>
+                    <p style="color: var(--amarillo-oscuro); font-weight: bold;">Suplente de Secretaria de Escalafón</p>
+                    <p style="font-size: 0.9rem; margin-top: 10px;">PTC Mantenimiento Industrial, 15 años en la Universidad, 10 años sindicalizada</p>
+                </div>
+                
+            </div>
+        </section>
+    </div> <div id="modalPlanPDF" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <a href="PLAN DE TRABAJO FORMATO FORMAL - PLANILLA AMARILLA.pdf" target="_blank" class="btn-descargar">Abrir en pantalla completa</a>
+                <span class="close-btn">&times;</span>
+            </div>
+            <div class="modal-body">
+                <iframe src="PLAN DE TRABAJO FORMATO FORMAL - PLANILLA AMARILLA.pdf" type="application/pdf"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Planilla Amarilla. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        // Smooth Scroll de Navegación
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Lógica de Ventana Modal PDF
+        const modal = document.getElementById("modalPlanPDF");
+        const btnAbrir1 = document.getElementById("btnAbrirPlan1");
+        const btnCerrar = document.querySelector(".close-btn");
+
+        function mostrarModal() {
+            modal.style.display = "block";
+            document.body.style.overflow = "hidden";
+        }
+
+        function ocultarModal() {
+            modal.style.display = "none";
+            document.body.style.overflow = "auto";
+        }
+
+        if(btnAbrir1) {
+            btnAbrir1.addEventListener("click", mostrarModal);
+        }
+        
+        btnCerrar.addEventListener("click", ocultarModal);
+
+        window.addEventListener("click", function(event) {
+            if (event.target === modal) {
+                ocultarModal();
+            }
+        });
+
+        // ==============================
+        // LÓGICA DEL CARRUSEL / SLIDER
+        // ==============================
+        let indiceActual = 1;
+        mostrarSlide(indiceActual);
+
+        // AutoPlay: Cambia la diapositiva cada 5 segundos
+        let temporizador = setInterval(() => { moverSlide(1); }, 8000);
+
+        function moverSlide(n) {
+            mostrarSlide(indiceActual += n);
+            reiniciarTemporizador();
+        }
+
+        function irASlide(n) {
+            mostrarSlide(indiceActual = n);
+            reiniciarTemporizador();
+        }
+
+        function mostrarSlide(n) {
+            let i;
+            let diapositivas = document.getElementsByClassName("slide");
+            let puntos = document.getElementsByClassName("dot");
+            
+            if (n > diapositivas.length) { indiceActual = 1 }    
+            if (n < 1) { indiceActual = diapositivas.length }
+            
+            for (i = 0; i < diapositivas.length; i++) {
+                diapositivas[i].style.display = "none";  
+            }
+            for (i = 0; i < puntos.length; i++) {
+                puntos[i].className = puntos[i].className.replace(" active", "");
+            }
+            
+            diapositivas[indiceActual-1].style.display = "block";  
+            puntos[indiceActual-1].className += " active";
+        }
+
+        function reiniciarTemporizador() {
+            clearInterval(temporizador);
+            temporizador = setInterval(() => { moverSlide(1); }, 5000);
+        }
+    </script>
+</body>
+</html>
