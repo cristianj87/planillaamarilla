@@ -7,8 +7,8 @@
     <title>Planilla Amarilla - STUT-CJ</title>
     <style>
         /* ==============================
-           CSS - ESTILOS VISUALES
-           ============================== */
+            CSS - ESTILOS VISUALES
+            ============================== */
         :root {
             --amarillo-principal: #FFCC00;
             --amarillo-oscuro: #E6B800;
@@ -31,8 +31,8 @@
         }
 
         /* ==============================
-           CSS - FONDO ANIMADO MODERNO (SOLO PARA TARJETAS)
-           ============================== */
+            CSS - FONDO ANIMADO MODERNO (SOLO PARA TARJETAS)
+            ============================== */
         .wrapper-tarjetas {
             position: relative;
             overflow: hidden;
@@ -202,8 +202,8 @@
         }
 
         /* ==============================
-           CSS - CARRUSEL / SLIDER
-           ============================== */
+            CSS - CARRUSEL / SLIDER
+            ============================== */
         .slider-wrapper {
             max-width: 75%;
             position: relative;
@@ -226,6 +226,12 @@
             display: block;
             border-radius: 10px;
             background-color: var(--blanco);
+            cursor: pointer; /* Indicar que la imagen es clicable */
+            transition: transform 0.3s ease;
+        }
+
+        .slide img:hover {
+            transform: scale(1.01);
         }
 
         .prev, .next {
@@ -242,6 +248,7 @@
             user-select: none;
             background-color: rgba(0,0,0,0.5);
             text-decoration: none;
+            z-index: 10;
         }
 
         /* CORRECCIÓN: Flecha Anterior a la Izquierda */
@@ -336,8 +343,8 @@
         }
 
         /* ==============================
-           CSS - VENTANA MODAL 
-           ============================== */
+            CSS - VENTANA MODAL (GENERAL)
+            ============================== */
         .modal {
             display: none;
             position: fixed;
@@ -348,19 +355,21 @@
             height: 100%;
             background-color: rgba(0, 0, 0, 0.85);
             backdrop-filter: blur(5px);
+            justify-content: center;
+            align-items: center;
         }
 
         .modal-content {
             display: flex;
             flex-direction: column;
             background-color: #ffffff;
-            margin: 2vh auto;
-            width: 90%;
-            height: 96vh;
+            margin: auto;
             border-radius: 8px;
             box-shadow: 0 5px 25px rgba(0,0,0,0.5);
             overflow: hidden;
             animation: entradaModal 0.3s ease-out;
+            max-width: 90%;
+            max-height: 96vh;
         }
 
         .modal-header {
@@ -370,6 +379,7 @@
             padding: 10px 20px;
             background-color: #f8f9fa;
             border-bottom: 1px solid #ddd;
+            width: 100%;
         }
 
         .btn-descargar {
@@ -382,7 +392,7 @@
             font-size: 0.9rem;
         }
 
-        .close-btn {
+        .close-btn, .close-btn-imagen {
             color: #333333;
             font-size: 30px;
             font-weight: bold;
@@ -391,7 +401,7 @@
             line-height: 1;
         }
 
-        .close-btn:hover {
+        .close-btn:hover, .close-btn-imagen:hover {
             color: var(--amarillo-oscuro);
         }
 
@@ -400,6 +410,8 @@
             width: 100%;
             overflow-y: auto;
             -webkit-overflow-scrolling: touch;
+            padding: 20px;
+            text-align: center;
         }
 
         .modal-body iframe {
@@ -414,6 +426,65 @@
             to { transform: translateY(0); opacity: 1; }
         }
 
+        /* ==============================
+            CSS - VENTANA MODAL PARA IMÁGENES
+            ============================== */
+        #modalImagen .modal-content {
+            width: auto;
+            height: auto;
+            max-width: 95vw;
+            max-height: 95vh;
+            background-color: transparent;
+            box-shadow: none;
+            border-radius: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #modalImagen .modal-body {
+            padding: 0;
+            overflow: visible;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #expandedImage {
+            max-width: 100%;
+            max-height: calc(85vh - 60px); /* Ajustar para el botón */
+            object-fit: contain;
+            border-radius: 5px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        /* Botón de Volver/Cerrar prominent en el Modal de Imagen */
+        .btn-volver-container {
+            width: 100%;
+            text-align: center;
+            padding: 15px 0;
+        }
+
+        .btn-volver {
+            background-color: var(--amarillo-principal);
+            color: var(--texto-oscuro);
+            padding: 1rem 3rem;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.2rem;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+            box-shadow: 0 4px 15px rgba(255, 204, 0, 0.4);
+        }
+
+        .btn-volver:hover {
+            background-color: var(--amarillo-oscuro);
+            transform: scale(1.03);
+        }
+
         /* Footer */
         footer {
             background-color: var(--texto-oscuro);
@@ -423,8 +494,8 @@
         }
 
         /* ==============================
-           DISEÑO RESPONSIVO (Tablets y Celulares)
-           ============================== */
+            DISEÑO RESPONSIVO (Tablets y Celulares)
+            ============================== */
         @media (max-width: 1024px) {
             .grid { 
                 grid-template-columns: repeat(2, 1fr);
@@ -459,12 +530,19 @@
 
             .modal-content { 
                 width: 100%; 
-                height: 100vh; 
+                height: auto;
+                max-height: 100vh;
                 margin: 0; 
                 border-radius: 0;
             }
+            
             .modal-header .btn-descargar {
                 font-size: 0.8rem;
+            }
+
+            .btn-volver {
+                padding: 0.8rem 2rem;
+                font-size: 1rem;
             }
         }
     </style>
@@ -499,15 +577,15 @@
         
         <div class="slider-wrapper">
             <div class="slide fade">
-                <img src="Oficial Planilla Amarilla.png" alt="Plan Estratégico Planilla Amarilla">
+                <img src="Oficial Planilla Amarilla.png" alt="Plan Estratégico Planilla Amarilla" class="carousel-image">
             </div>
 
             <div class="slide fade">
-                <img src="planilla.png" alt="Integrantes de la planilla">
+                <img src="planilla.png" alt="Integrantes de la planilla" class="carousel-image">
             </div>
 
             <div class="slide fade">
-                <img src="logo2.jpg" alt="Logo Planilla Amarilla">
+                <img src="logo2.jpg" alt="Logo Planilla Amarilla" class="carousel-image">
             </div>
 
             <a class="prev" onclick="moverSlide(-1)">&#10094;</a>
@@ -582,14 +660,14 @@
                     <img src="Fotosmejor/Carmen Yadira Tarango Ortiz.jpeg" alt="Foto Secretario General" class="foto-integrante">
                     <h3>Carmen Yadira Tarango O.</h3>
                     <p style="color: var(--amarillo-oscuro); font-weight: bold;">Secretaria General</p>
-                    <p style="font-size: 0.9rem; margin-top: 10px;">Profesor de asignatura con función tutorial (PACFT), Mantenimiento Industrial  13 años en la Universidad, 10 en el sindicato</p>
+                    <p style="font-size: 0.9rem; margin-top: 10px;">Profesor de asignatura con función tutorial (PACFT), Mantenimiento Industrial 13 años en la Universidad, 10 en el sindicato</p>
                 </div>
                 
                 <div class="card text-center">
                     <img src="Fotosmejor/Víctor Manuel Portillo Castillo.jpeg" alt="Foto Secretario de Organización" class="foto-integrante">
                     <h3>Víctor Manuel Portillo Castillo</h3>
                     <p style="color: var(--amarillo-oscuro); font-weight: bold;">Secretario de Organización</p>
-                    <p style="font-size: 0.9rem; margin-top: 10px;">Profesor de tiempo completo.  15 años en la Universidad. Profesor Inevestigador, carrera de Ingeniería en Logística Internacional.</p>
+                    <p style="font-size: 0.9rem; margin-top: 10px;">Profesor de tiempo completo. 15 años en la Universidad. Profesor Inevestigador, carrera de Ingeniería en Logística Internacional.</p>
                 </div>
 
                  <div class="card text-center">
@@ -651,7 +729,7 @@
 
                 <div class="card text-center">
                     <img src="Fotosmejor/Juan Cristo Rey Garay.jpeg" alt="Foto Suplente Secretario Trabajo" class="foto-integrante">
-                    <h3>Juan Cristo Rey Garay</h3>
+                    <h3>Juan Cristo Rey Garay L.</h3>
                     <p style="color: var(--amarillo-oscuro); font-weight: bold;">Suplente de Secretario de Organización</p>
                     <p style="font-size: 0.9rem; margin-top: 10px;">Adscrito en Desarrollo académico, PTC Carrera de Mantenimiento Industrial,11 años en la Universidad, 1 año y 9 meses sindicalizado</p>
                 </div>
@@ -707,7 +785,10 @@
                 
             </div>
         </section>
-    </div> <div id="modalPlanPDF" class="modal">
+    </div>
+
+    <!-- VENTANA MODAL PARA PDF -->
+    <div id="modalPlanPDF" class="modal">
         <div class="modal-content">
             <div class="modal-header">
                 <a href="PLAN DE TRABAJO FORMATO FORMAL - PLANILLA AMARILLA.pdf" target="_blank" class="btn-descargar">Abrir en pantalla completa</a>
@@ -719,13 +800,25 @@
         </div>
     </div>
 
+    <!-- VENTANA MODAL PARA IMÁGENES EXPANDIDAS -->
+    <div id="modalImagen" class="modal">
+        <div class="modal-content">
+            <div class="modal-body">
+                <img id="expandedImage" src="" alt="Imagen Expandida">
+                <div class="btn-volver-container">
+                    <button id="btnVolverPrincipal" class="btn-volver">VOLVER A LA PÁGINA PRINCIPAL</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <footer>
         <p>&copy; 2026 Planilla Amarilla. Todos los derechos reservados.</p>
     </footer>
 
     <script>
         // Smooth Scroll de Navegación
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 document.querySelector(this.getAttribute('href')).scrollIntoView({
@@ -734,30 +827,70 @@
             });
         });
 
-        // Lógica de Ventana Modal PDF
-        const modal = document.getElementById("modalPlanPDF");
-        const btnAbrir1 = document.getElementById("btnAbrirPlan1");
-        const btnCerrar = document.querySelector(".close-btn");
+        // ==============================
+        // LÓGICA DE VENTANAS MODALES
+        // ==============================
 
-        function mostrarModal() {
-            modal.style.display = "block";
+        // 1. Modal PDF
+        const modalPDF = document.getElementById("modalPlanPDF");
+        const btnAbrirPDF1 = document.getElementById("btnAbrirPlan1");
+        const btnCerrarPDF = modalPDF.querySelector(".close-btn");
+
+        function mostrarModalPDF() {
+            modalPDF.style.display = "flex";
             document.body.style.overflow = "hidden";
         }
 
-        function ocultarModal() {
-            modal.style.display = "none";
+        function ocultarModalPDF() {
+            modalPDF.style.display = "none";
             document.body.style.overflow = "auto";
         }
 
-        if(btnAbrir1) {
-            btnAbrir1.addEventListener("click", mostrarModal);
+        if(btnAbrirPDF1) {
+            btnAbrirPDF1.addEventListener("click", mostrarModalPDF);
         }
         
-        btnCerrar.addEventListener("click", ocultarModal);
+        btnCerrarPDF.addEventListener("click", ocultarModalPDF);
 
+        // 2. Modal de Imagen Expandida (Lightbox)
+        const modalImagen = document.getElementById("modalImagen");
+        const expandedImage = document.getElementById("expandedImage");
+        const btnVolver = document.getElementById("btnVolverPrincipal");
+        const carouselImages = document.querySelectorAll(".carousel-image");
+
+        function mostrarModalImagen(src, alt) {
+            expandedImage.src = src;
+            expandedImage.alt = alt;
+            modalImagen.style.display = "flex";
+            document.body.style.overflow = "hidden"; // Desactivar scroll de la página principal
+            detenerTemporizador(); // Detener el autoplay del carrusel
+        }
+
+        function ocultarModalImagen() {
+            modalImagen.style.display = "none";
+            document.body.style.overflow = "auto"; // Reactivar scroll
+            iniciarTemporizador(); // Reactivar autoplay
+        }
+
+        // Asignar evento click a todas las imágenes del carrusel
+        carouselImages.forEach(image => {
+            image.addEventListener("click", function() {
+                mostrarModalImagen(this.src, this.alt);
+            });
+        });
+
+        // Botón de Volver/Cerrar
+        if(btnVolver) {
+            btnVolver.addEventListener("click", ocultarModalImagen);
+        }
+
+        // Cerrar modales al hacer clic fuera del contenido
         window.addEventListener("click", function(event) {
-            if (event.target === modal) {
-                ocultarModal();
+            if (event.target === modalPDF) {
+                ocultarModalPDF();
+            }
+            if (event.target === modalImagen) {
+                ocultarModalImagen();
             }
         });
 
@@ -766,9 +899,19 @@
         // ==============================
         let indiceActual = 1;
         mostrarSlide(indiceActual);
+        let temporizador;
 
-        // AutoPlay: Cambia la diapositiva cada 5 segundos
-        let temporizador = setInterval(() => { moverSlide(1); }, 8000);
+        function iniciarTemporizador() {
+            // AutoPlay: Cambia la diapositiva cada 8 segundos
+            temporizador = setInterval(() => { moverSlide(1); }, 8000);
+        }
+
+        function detenerTemporizador() {
+            clearInterval(temporizador);
+        }
+
+        // Iniciar temporizador al cargar
+        iniciarTemporizador();
 
         function moverSlide(n) {
             mostrarSlide(indiceActual += n);
@@ -795,13 +938,17 @@
                 puntos[i].className = puntos[i].className.replace(" active", "");
             }
             
-            diapositivas[indiceActual-1].style.display = "block";  
-            puntos[indiceActual-1].className += " active";
+            if(diapositivas[indiceActual-1]) {
+                diapositivas[indiceActual-1].style.display = "block";  
+            }
+            if(puntos[indiceActual-1]) {
+                puntos[indiceActual-1].className += " active";
+            }
         }
 
         function reiniciarTemporizador() {
-            clearInterval(temporizador);
-            temporizador = setInterval(() => { moverSlide(1); }, 5000);
+            detenerTemporizador();
+            iniciarTemporizador();
         }
     </script>
 </body>
