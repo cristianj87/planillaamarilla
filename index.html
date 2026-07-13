@@ -130,7 +130,7 @@
 
         /* Sección Hero (Inicio) */
         .hero {
-            background: linear-gradient(-45deg, rgba(0, 0, 0, 0.8), rgba(51, 51, 51, 0.5), rgba(0, 0, 0, 0.9), rgba(10, 10, 10, 0.7)), url('planilla3.png') center/cover;
+            background: linear-gradient(-45deg, rgba(0, 0, 0, 0.8), rgba(51, 51, 51, 0.5), rgba(0, 0, 0, 0.9), rgba(10, 10, 10, 0.7)), url('Planillaamarillaintegrantes2.png') center/cover;
             background-size: 200% 200%, cover;
             animation: degradadoHero 15s ease infinite;
             color: var(--blanco);
@@ -355,15 +355,15 @@
             height: 100%;
             background-color: rgba(0, 0, 0, 0.85);
             backdrop-filter: blur(5px);
-            justify-content: center;
-            align-items: center;
+            /*justify-content: center;
+            align-items: center;*/
         }
 
         .modal-content {
             display: flex;
             flex-direction: column;
             background-color: #ffffff;
-            margin: auto;
+            margin: 2vh auto;
             border-radius: 8px;
             box-shadow: 0 5px 25px rgba(0,0,0,0.5);
             overflow: hidden;
@@ -530,8 +530,8 @@
 
             .modal-content { 
                 width: 100%; 
-                height: auto;
-                max-height: 100vh;
+                height: 100vh;
+                /*max-height: 100vh;*/
                 margin: 0; 
                 border-radius: 0;
             }
@@ -575,13 +575,18 @@
     <section id="avisos" class="text-center" style="background-color: var(--fondo-claro);">
         <h2 class="section-title">Avisos y Plan Estratégico</h2>
         <h3>👉Haz clic en la imagen para verla a pantalla completa</h3>
+        
         <div class="slider-wrapper">
             <div class="slide fade">
                 <img src="Oficial Planilla Amarilla.png" alt="Plan Estratégico Planilla Amarilla" class="carousel-image">
             </div>
 
             <div class="slide fade">
-                <img src="planilla.png" alt="Integrantes de la planilla" class="carousel-image">
+                <img src="Planillafacebook.png" alt="Integrantes de la planilla" class="carousel-image">
+            </div>
+
+            <div class="slide fade">
+                <img src="Planillaamarillaintegrantes.png" alt="Integrantes de la planilla" class="carousel-image">
             </div>
 
             <div class="slide fade">
@@ -596,6 +601,7 @@
             <span class="dot" onclick="irASlide(1)"></span> 
             <span class="dot" onclick="irASlide(2)"></span>
             <span class="dot" onclick="irASlide(3)"></span>
+            <span class="dot" onclick="irASlide(4)"></span>
         </div>
     </section>
 
@@ -837,7 +843,7 @@
         const btnCerrarPDF = modalPDF.querySelector(".close-btn");
 
         function mostrarModalPDF() {
-            modalPDF.style.display = "flex";
+            modalPDF.style.display = "block";
             document.body.style.overflow = "hidden";
         }
 
