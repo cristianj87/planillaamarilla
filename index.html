@@ -211,7 +211,7 @@
             border-radius: 10px;
             box-shadow: 0 4px 20px rgba(0,0,0,0.15);
             overflow: hidden;
-            background-color: var(--blanco); /* Fondo blanco para las imágenes más pequeñas */
+            background-color: var(--blanco); 
         }
 
         .slide {
@@ -221,12 +221,12 @@
 
         .slide img {
             width: 100%;
-            height: 450px; /* Altura fija uniforme para todas las imágenes */
-            object-fit: contain; /* Ajusta la imagen para que se vea completa sin deformarse */
+            height: 450px; 
+            object-fit: contain; 
             display: block;
             border-radius: 10px;
             background-color: var(--blanco);
-            cursor: pointer; /* Indicar que la imagen es clicable */
+            cursor: pointer; 
             transition: transform 0.3s ease;
         }
 
@@ -251,7 +251,6 @@
             z-index: 10;
         }
 
-        /* CORRECCIÓN: Flecha Anterior a la Izquierda */
         .prev {
             left: 0;
             border-radius: 0 5px 5px 0;
@@ -296,6 +295,71 @@
         @keyframes fadeAnim {
             from {opacity: .4} 
             to {opacity: 1}
+        }
+
+        /* ==============================
+            CSS - SECCIÓN DE NOTICIAS
+            ============================== */
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .news-card {
+            background-color: var(--blanco);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .news-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .news-img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            cursor: pointer;
+            transition: opacity 0.3s;
+        }
+
+        .news-img:hover {
+            opacity: 0.9;
+        }
+
+        .news-content {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .news-date {
+            font-size: 0.85rem;
+            color: #777;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .news-content h3 {
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+            color: var(--texto-oscuro);
+        }
+
+        .news-content p {
+            font-size: 1rem;
+            color: #555;
+            flex-grow: 1;
+            margin-bottom: 1.5rem;
         }
 
         /* Ejes de Acción y Equipo */
@@ -355,8 +419,6 @@
             height: 100%;
             background-color: rgba(0, 0, 0, 0.85);
             backdrop-filter: blur(5px);
-            /*justify-content: center;
-            align-items: center;*/
         }
 
         .modal-content {
@@ -453,13 +515,12 @@
 
         #expandedImage {
             max-width: 100%;
-            max-height: calc(85vh - 60px); /* Ajustar para el botón */
+            max-height: calc(85vh - 60px); 
             object-fit: contain;
             border-radius: 5px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
-        /* Botón de Volver/Cerrar prominent en el Modal de Imagen */
         .btn-volver-container {
             width: 100%;
             text-align: center;
@@ -504,7 +565,7 @@
                 max-width: 90%; 
             }
             .slide img {
-                height: 350px; /* Ajuste para tablets */
+                height: 350px; 
             }
         }
 
@@ -523,7 +584,6 @@
                 max-width: 100%; 
             }
             
-            /* Ajuste de altura del carrusel para celulares */
             .slide img {
                 height: 280px; 
             }
@@ -531,7 +591,6 @@
             .modal-content { 
                 width: 100%; 
                 height: 100vh;
-                /*max-height: 100vh;*/
                 margin: 0; 
                 border-radius: 0;
             }
@@ -557,6 +616,7 @@
         <nav>
             <a href="#inicio">Inicio</a>
             <a href="#avisos">Avisos y Plan</a>
+            <a href="#noticias">Noticias</a>
             <a href="#ejes">Ejes de Trabajo</a>
             <a href="#integrantes">Integrantes</a>
         </nav>
@@ -587,7 +647,7 @@
             </div>
 
             <div class="slide fade">
-                <img src="Planillafacebook.png" alt="Integrantes de la planilla" class="carousel-image">
+                <img src="Planillafacebook.png" alt="Facebook planilla" class="carousel-image">
             </div>
 
             <div class="slide fade">
@@ -607,6 +667,51 @@
             <span class="dot" onclick="irASlide(2)"></span>
             <span class="dot" onclick="irASlide(3)"></span>
             <span class="dot" onclick="irASlide(4)"></span>
+        </div>
+    </section>
+
+    <!-- ==============================
+         NUEVA SECCIÓN: NOTICIAS Y EVENTOS
+         ============================== -->
+    <section id="noticias" style="background-color: #ffffff;">
+        <h2 class="section-title">Noticias y Eventos</h2>
+        <div class="news-grid">
+            
+            <!-- Ejemplo de Noticia 1 -->
+            <div class="news-card">
+                <img src="Oficial Planilla Amarilla.png" alt="Estrategias Planilla Amarilla" class="news-img">
+                <img src="Noticiasyeventos/webplan.png" alt="Plan estrategico" class="news-img">
+                <div class="news-content">
+                    <span class="news-date">9 de Julio, 2026</span>
+                    <h3>Presentación del Plan Estratégico</h3>
+                    <p>Ante una gran afluencia de compañeros, desglosamos los ejes principales que guiarán nuestra gestión 2026-2029. ¡Gracias por su apoyo!</p>
+                </div>
+            </div>
+
+            <!-- Ejemplo de Noticia 2 -->
+            <div class="news-card">
+                <img src="Noticiasyeventos/recorrido1.jpg" alt="Imagen de la noticia 2" class="news-img">
+                <img src="Noticiasyeventos/recorrido2.jpg" alt="Imagen de la noticia 2" class="news-img">
+                <div class="news-content">
+                    <span class="news-date">14 de Julio, 2026</span>
+                    <h3>Recorrido por los departamentos</h3>
+                    <p>El equipo de la Planilla Amarilla mantiene el dinamismo en su campaña, llevando sus propuestas directamente a los espacios de trabajo de la institución. <br>Comenzaron sus recorridos escuchando de primera mano las necesidades de nuestros compañeros de las diferentes áreas, de talleres y laboratorios.</p>
+                </div>
+            </div>
+
+            <!-- Ejemplo de Noticia 3 -->
+            <div class="news-card">
+                <img src="Noticiasyeventos/reunión.jpg" alt="Imagen de la noticia 3" class="news-img">
+                <img src="Noticiasyeventos/reunión2.jpg" alt="Imagen de la noticia 3" class="news-img">
+                <div class="news-content">
+                    <span class="news-date">14 de Julio, 2026</span>
+                    <h3>Avanzan los trabajos de la Planilla Amarilla: Unidad y propuesta de cara al futuro</h3>
+                    <p>Se llevó a cabo una importante reunión de trabajo por parte de los integrantes de la Planilla Amarilla, quienes afinan los detalles de su proyecto enfocado en el fortalecimiento de la comunidad de los sindicalizados STUT-CJ.
+Durante la mesa de trabajo, se abordaron ejes fundamentales para la base trabajadora, proyectando sus objetivos principales:
+<strong>Defensa y bienestar, Respaldo académico, Diálogo abierto.</p></strong>
+                </div>
+            </div>
+
         </div>
     </section>
 
@@ -867,7 +972,8 @@
         const modalImagen = document.getElementById("modalImagen");
         const expandedImage = document.getElementById("expandedImage");
         const btnVolver = document.getElementById("btnVolverPrincipal");
-        const carouselImages = document.querySelectorAll(".carousel-image");
+        // Se seleccionan tanto las imágenes del carrusel como las de las noticias
+        const ampliableImages = document.querySelectorAll(".carousel-image, .news-img");
 
         function mostrarModalImagen(src, alt) {
             expandedImage.src = src;
@@ -883,8 +989,8 @@
             iniciarTemporizador(); // Reactivar autoplay
         }
 
-        // Asignar evento click a todas las imágenes del carrusel
-        carouselImages.forEach(image => {
+        // Asignar evento click a todas las imágenes seleccionadas
+        ampliableImages.forEach(image => {
             image.addEventListener("click", function() {
                 mostrarModalImagen(this.src, this.alt);
             });
